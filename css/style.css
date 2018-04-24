@@ -11,6 +11,17 @@
   margin: 5px;
   box-sizing: content-box;
 }
+.icon-link.fill.instagram {
+  background-color: #C17367;
+}
+.icon-link.fill.instagram:hover {
+  background-color: #fff;
+}
+.icon-link.fill.instagram:hover .fa-instagram {
+  color: #C17367;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+}
 .icon-link.fill.facebook {
   background-color: #3b5998;
 }
@@ -152,6 +163,9 @@
   width: 56px;
   background-color: #fff;
 }
+.icon-link:hover.instagram {
+  border: 2px solid #C17367;
+}
 .icon-link:hover.facebook {
   border: 2px solid #3b5998;
 }
@@ -187,6 +201,11 @@
 }
 .icon-link:hover .fa {
   line-height: 56px;
+}
+.icon-link:hover .fa-instagram {
+  color: #C17367;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
 }
 .icon-link:hover .fa-facebook {
   color: #3b5998;
