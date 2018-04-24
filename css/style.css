@@ -12,13 +12,13 @@
   box-sizing: content-box;
 }
 .icon-link.fill.instagram {
-  background-color: #C17367;
+  background-color: #DF461B;
 }
 .icon-link.fill.instagram:hover {
   background-color: #fff;
 }
 .icon-link.fill.instagram:hover .fa-instagram {
-  color: #C17367;
+  color: #DF461B;
   -webkit-transition: color 150ms ease-in-out;
   transition: color 150ms ease-in-out;
 }
@@ -164,7 +164,7 @@
   background-color: #fff;
 }
 .icon-link:hover.instagram {
-  border: 2px solid #C17367;
+  border: 2px solid #DF461B;
 }
 .icon-link:hover.facebook {
   border: 2px solid #3b5998;
@@ -203,7 +203,7 @@
   line-height: 56px;
 }
 .icon-link:hover .fa-instagram {
-  color: #C17367;
+  color: #DF461B;
   -webkit-transition: color 150ms ease-in-out;
   transition: color 150ms ease-in-out;
 }
