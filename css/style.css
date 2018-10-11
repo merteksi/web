@@ -11,6 +11,17 @@
   margin: 5px;
   box-sizing: content-box;
 }
+.icon-link.fill.telegram {
+  background-color: #DF461B;
+}
+.icon-link.fill.telegram:hover {
+  background-color: #fff;
+}
+.icon-link.fill.telegram:hover .fa-telegram {
+  color: #DF461B;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+}
 .icon-link.fill.instagram {
   background-color: #DF461B;
 }
@@ -163,6 +174,9 @@
   width: 56px;
   background-color: #fff;
 }
+.icon-link:hover.telegram {
+  border: 2px solid #DF461B;
+}
 .icon-link:hover.instagram {
   border: 2px solid #DF461B;
 }
@@ -201,6 +215,11 @@
 }
 .icon-link:hover .fa {
   line-height: 56px;
+}
+.icon-link:hover .fa-telegram {
+  color: #DF461B;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
 }
 .icon-link:hover .fa-instagram {
   color: #DF461B;
