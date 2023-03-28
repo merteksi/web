@@ -47,35 +47,32 @@
       <br>
       <button type="button" onclick="downloadFiles()">Download</button>
     </form>
-    <script>
-      function downloadFiles() {
-        // Get the URLs from the text input
-        var urls = document.getElementById("urls").value.split("\n");
-        
-        // Loop through the URLs and download each file
-        for (var i = 0; i < urls.length; i++) {
-          var url = urls[i].trim();
-          
-          // Create a new XMLHttpRequest object
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', url, true);
-          xhr.responseType = 'blob';
-          
-          // When the download is complete, save the file
-          xhr.onload = function(e) {
-            if (this.status == 200) {
-              var blob = new Blob([this.response], {type: 'application/octet-stream'});
-              var link = document.createElement('a');
-              link.href = window.URL.createObjectURL(blob);
-              link.download = url.substring(url.lastIndexOf('/')+1);
-              link.click();
-            }
-          };
-          
-          // Send the XMLHttpRequest object
-          xhr.send();
-        }
-      }
-    </script>
+<script>
+  function downloadFiles() {
+    // Get the URLs from the text input
+    var urls = document.getElementById("urls").value.split("\n");
+
+    // Loop through the URLs and download each file
+    for (var i = 0; i < urls.length; i++) {
+      var url = urls[i].trim();
+      var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+      var extension = filename.substring(filename.lastIndexOf(".") + 1);
+
+      // Create a new anchor element to initiate the download
+      var anchor = document.createElement("a");
+      anchor.style.display = "none";
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+
+      // Trigger the download
+      anchor.click();
+
+      // Remove the anchor from the DOM
+      document.body.removeChild(anchor);
+    }
+  }
+</script>
+
   </body>
 </html>
