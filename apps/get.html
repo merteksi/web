@@ -4,35 +4,37 @@
     <title>Download Files</title>
     <style>
       body {
-        font-family: sans-serif;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
       }
       h1 {
-        margin-bottom: 20px;
+        text-align: center;
       }
       form {
-        margin-bottom: 20px;
+        margin: 0 auto;
+        max-width: 600px;
       }
       label {
         display: block;
         margin-bottom: 5px;
-        font-weight: bold;
       }
       textarea {
         width: 100%;
-        font-family: monospace;
+        height: 200px;
+        resize: vertical;
       }
       button {
-        display: block;
         margin-top: 10px;
-        padding: 10px;
-        font-size: 1.1em;
+        padding: 5px 10px;
         background-color: #4CAF50;
         color: white;
         border: none;
+        border-radius: 5px;
         cursor: pointer;
+      }
+      button:hover {
+        background-color: #3e8e41;
       }
     </style>
   </head>
@@ -40,32 +42,38 @@
     <h1>Download Files</h1>
     <form>
       <label for="urls">Enter URLs to download (one per line):</label>
-      <textarea id="urls" name="urls" rows="10" cols="80"></textarea>
+      <br>
+      <textarea id="urls" name="urls"></textarea>
+      <br>
       <button type="button" onclick="downloadFiles()">Download</button>
     </form>
     <script>
       function downloadFiles() {
+        // Get the URLs from the text input
         var urls = document.getElementById("urls").value.split("\n");
         
+        // Loop through the URLs and download each file
         for (var i = 0; i < urls.length; i++) {
           var url = urls[i].trim();
-          if (url !== "") {
-            fetch(url)
-              .then(response => response.blob())
-              .then(blob => {
-                var a = document.createElement("a");
-                var url = window.URL.createObjectURL(blob);
-                a.href = url;
-                a.download = url.split("/").pop();
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                  document.body.removeChild(a);
-                  window.URL.revokeObjectURL(url);
-                }, 0);
-              })
-              .catch(error => console.error(error));
-          }
+          
+          // Create a new XMLHttpRequest object
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.responseType = 'blob';
+          
+          // When the download is complete, save the file
+          xhr.onload = function(e) {
+            if (this.status == 200) {
+              var blob = new Blob([this.response], {type: 'application/octet-stream'});
+              var link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = url.substring(url.lastIndexOf('/')+1);
+              link.click();
+            }
+          };
+          
+          // Send the XMLHttpRequest object
+          xhr.send();
         }
       }
     </script>
