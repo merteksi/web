@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Download Files</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      label {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      
+      textarea {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 10px;
+        padding: 5px;
+        font-size: 14px;
+        resize: vertical;
+      }
+      
+      button {
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+      }
+      
+      button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Download Files</h1>
+    <form>
+      <label for="urls">Enter URLs to download (one per line):</label>
+      <br>
+      <textarea id="urls" name="urls"></textarea>
+      <br>
+      <button type="button" onclick="downloadFiles()">Download</button>
+    </form>
+    <script>
+      function downloadFiles() {
+        // Retrieve the URLs entered by the user
+        const urlsTextarea = document.getElementById('urls');
+        const urls = urlsTextarea.value.trim().split('\n');
+        
+        // Loop through the array of URLs
+        urls.forEach(url => {
+          // Open the URL in a new tab
+          const win = window.open(url, '_blank');
+          
+          // Wait for the page to load, then print as PDF
+          win.addEventListener('load', () => {
+            win.print();
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
