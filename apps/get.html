@@ -39,7 +39,7 @@
     </style>
   </head>
   <body>
-    <h1>Downloader</h1>
+    <h1>Downloader 1</h1>
     <form>
       <label for="urls">Enter URLs to download (one per line):</label>
       <br>
@@ -47,55 +47,31 @@
       <br>
       <button type="button" onclick="downloadFiles()">Download</button>
     </form>
-<script>
-  function downloadFiles() {
-  // Get the URLs from the text input
-  var urls = document.getElementById("urls").value.split("\n");
+    <script>
+      function downloadFiles() {
+        // Get the URLs from the text input
+        var urls = document.getElementById("urls").value.split("\n");
 
-  // Loop through the URLs and download each file
-  for (var i = 0; i < urls.length; i++) {
-    var url = urls[i].trim();
-    var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-    var extension = filename.substring(filename.lastIndexOf(".") + 1);
+        // Loop through the URLs and download each file
+        for (var i = 0; i < urls.length; i++) {
+          var url = urls[i].trim();
+          var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+          var extension = filename.substring(filename.lastIndexOf(".") + 1);
 
-    // Create a new XHR object
-    var xhr = new XMLHttpRequest();
+          // Create a new anchor element to initiate the download
+          var anchor = document.createElement("a");
+          anchor.style.display = "none";
+          anchor.href = url;
+          anchor.download = filename;
+          document.body.appendChild(anchor);
 
-    // Set the responseType to "blob" for binary data
-    xhr.responseType = "blob";
+          // Trigger the download
+          anchor.click();
 
-    // Define the onload event handler
-    xhr.onload = function(event) {
-      // Get the blob object from the response
-      var blob = xhr.response;
-
-      // Create a new anchor element to initiate the download
-      var anchor = document.createElement("a");
-      anchor.style.display = "none";
-      anchor.href = URL.createObjectURL(blob);
-      anchor.download = filename;
-
-      // Set the Content-Disposition header to force the download
-      var headers = xhr.getAllResponseHeaders();
-      var contentDisposition = headers.match(/Content-Disposition\:\s*attachment/);
-      if (contentDisposition) {
-        anchor.setAttribute("download", filename);
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-      } else {
-        window.open(url, "_blank");
+          // Remove the anchor from the DOM
+          document.body.removeChild(anchor);
+        }
       }
-    };
-
-    // Open the XHR request
-    xhr.open("GET", url);
-
-    // Send the XHR request
-    xhr.send();
-  }
-}
-</script>
-
+    </script>
   </body>
 </html>
