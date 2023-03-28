@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Get Files</title>
+    <title>Download Files</title>
     <style>
       body {
         font-family: Arial, sans-serif;
+        margin: 20px;
       }
-
+      
       h1 {
         text-align: center;
-        margin-top: 20px;
       }
-
+      
       form {
-        width: 80%;
-        margin: 0 auto;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-
+      
       label {
+        margin-bottom: 10px;
         font-weight: bold;
       }
-
+      
       textarea {
         width: 100%;
         height: 200px;
-        padding: 10px;
-        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
         font-size: 14px;
-        line-height: 1.5;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: none;
+        resize: vertical;
       }
-
+      
       button {
-        display: block;
-        margin: 20px auto 0;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        color: #fff;
-        background-color: #007bff;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
         border: none;
-        border-radius: 5px;
         cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
       }
-
+      
       button:hover {
-        background-color: #0069d9;
+        background-color: #3e8e41;
       }
     </style>
   </head>
   <body>
-    <h1>Mert's Downloader</h1>
+    <h1>Download Files</h1>
     <form>
       <label for="urls">Enter URLs to download (one per line):</label>
       <br>
@@ -69,8 +67,11 @@
         for (var i = 0; i < urls.length; i++) {
           var url = urls[i].trim();
           
-          // Open a new window and download the file
-          window.open(url, "_blank");
+          // Create a link and trigger a download
+          var link = document.createElement("a");
+          link.href = url;
+          link.download = url.substring(url.lastIndexOf('/')+1);
+          link.click();
         }
       }
     </script>
