@@ -69,12 +69,21 @@
           // Open the URL in a new tab
           const win = window.open(url, '_blank');
           
-          // Wait for the page to load, then print as PDF
+          // Wait for the page to load, then trigger printing process
           win.addEventListener('load', () => {
-            win.print();
+            // Send a message to the parent window to trigger printing
+            win.postMessage('print', '*');
           });
         });
       }
+      
+      // Listen for messages from child windows/tabs
+      window.addEventListener('message', event => {
+        // If the message is a print request, print the window as a PDF
+        if (event.data === 'print') {
+          window.print();
+        }
+      });
     </script>
   </body>
 </html>
