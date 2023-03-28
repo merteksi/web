@@ -5,15 +5,9 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        font-size: 16px;
       }
       h1 {
         text-align: center;
-        margin-top: 30px;
-      }
-      form {
-        margin: 30px auto;
-        width: 500px;
       }
       label {
         display: block;
@@ -21,20 +15,19 @@
       }
       textarea {
         width: 100%;
-        height: 200px;
+        height: 150px;
         resize: vertical;
-        padding: 5px;
-        font-size: 16px;
+        margin-bottom: 10px;
       }
       button {
         display: block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #0077cc;
-        color: #fff;
+        margin: 0 auto;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
         border: none;
         border-radius: 5px;
-        font-size: 16px;
         cursor: pointer;
       }
     </style>
@@ -55,10 +48,11 @@
         for (var i = 0; i < urls.length; i++) {
           var url = urls[i].trim();
           
-          // Create a hidden link and click it to download the file
+          // Create a temporary anchor element to trigger the download
           var link = document.createElement("a");
-          link.setAttribute("href", url);
-          link.setAttribute("download", "");
+          link.href = url;
+          link.download = url.substring(url.lastIndexOf("/") + 1);
+          link.style.display = "none";
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
