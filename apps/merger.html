@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Merge SVGZ files into a PDF</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script>
     function mergeSvgzFiles() {
-      // Set the directory path where SVGZ files are located
-      const directoryPath = '/path/to/svgz/files';
+      // Get the directory path from the text input field
+      const directoryPath = document.getElementById('directory-path').value;
 
       // Get a list of all SVGZ files in the directory
       const svgzFiles = ['file1.svgz', 'file2.svgz', 'file3.svgz'];
@@ -51,9 +53,8 @@
 </head>
 <body>
   <h1>Merge SVGZ files into a PDF</h1>
-  <p>Click the button below to merge the SVGZ files into a single PDF document.</p>
+  <p>Enter the directory path where the SVGZ files are located:</p>
+  <input type="text" id="directory-path">
   <button onclick="mergeSvgzFiles()">Merge SVGZ files</button>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </body>
 </html>
